@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xml:th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Witamy w FIT&GIT!</title>
+</head>
+<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+    <h1>Witaj w aplikacji FIT&GIT!</h1>
+</div>
+<body>
+<a href="/">Pokaż wszystkie przpiesy</a>
+<div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+    <div class="card-body">
+
+
+        <ul>
+            <p>Przepisy: </p>
+            <li th:each="przepis: ${reciptes}">
+                <a th:href="|/przepis?id=${przepis.Id}|" th:text="${przepis.title}"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<a href="/new">Dodaj nowy przepis</a>
+
+
+<form th:action="@{/deleteall}" method = "post" th:object="${przepis}" >
+    <input type="submit" value="Usuń wszystkie przepisy!" class="btn btn-primary">
+</form>
+</body>
+</html>

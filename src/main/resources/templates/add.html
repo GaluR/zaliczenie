@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>Dodawanie nowe przepisu</h3>
+
+
+<form th:action="@{/add}" method="post" th:object="${addRecipe}">
+    <div class="form-group">
+        <p>Podaj nazwę przepisu</p><br/>
+        <input type="text" th:field="*{title}" placeholder="Nazwa przepisu"/><br/>
+        <p>Opis przepisu</p>
+        <textarea th:field="*{description}" placeholder="Opis przepisu"/> <br/>
+        <p>Podaj czas przygotowania potrawy</p><br/>
+        <input type="time" th:field="*{time}" placeholder="Czas przygotowania"/><br/>
+    </div>
+    <br/>
+    <input type="submit" value="Dodaj zadanie" class="btn btn-primary"/> <br/>
+</form>
+
+</body>
+</html>
