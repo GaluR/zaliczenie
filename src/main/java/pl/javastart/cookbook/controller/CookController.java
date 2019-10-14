@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.javastart.cookbook.entity.Recipe;
 import pl.javastart.cookbook.repository.CookBookRepository;
-
 import java.util.List;
+
 
 
 @Controller
@@ -21,11 +21,18 @@ public class CookController {
     }
 
     @GetMapping("/")
-    public String getRecipt(Model model) {
+    public String start(Model model) {
         List<Recipe> reciptes = cookBookRepository.findAll();
         model.addAttribute("reciptes", reciptes);
         model.addAttribute("addRecipe", new Recipe());
         return "home";
+    }
+    @GetMapping("/home")
+    public String getRecipt(Model model) {
+        List<Recipe> reciptes = cookBookRepository.findAll();
+        model.addAttribute("reciptes", reciptes);
+        model.addAttribute("addRecipe", new Recipe());
+        return "start";
     }
 
     @GetMapping("/przepis")
@@ -41,9 +48,9 @@ public class CookController {
         return "redirect:/";
     }
 
-    @PostMapping("/delete")
-    public String deleteRecipe(@RequestParam long Id) {
-        cookBookRepository.deleteById(Id);
+    @GetMapping("/delete")
+    public String deleteRecipe(@RequestParam long id) {
+        cookBookRepository.deleteById(id);
         return "redirect:/";
     }
 
@@ -56,6 +63,16 @@ public class CookController {
     @PostMapping("/deleteall")
     public String deleteAllRecipes() {
         cookBookRepository.deleteAll();
+        return "redirect:/";
+    }
+
+    @PostMapping("edit")
+    public String edit(@RequestParam long id){
+        Recipe one = cookBookRepository.getOne(id);
+        one.setTitle(one.getTitle());
+        one.setDescription(one.getDescription());
+        one.setTime(one.getTime());
+        cookBookRepository.save(one);
         return "redirect:/";
     }
 }

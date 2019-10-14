@@ -16,13 +16,13 @@ public class Recipe {
     private String title;
     private String description;
     @DateTimeFormat(pattern = "HH:mm")
-    private Time time;
+    private String time;
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

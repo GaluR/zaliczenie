@@ -6,29 +6,19 @@
     <meta charset="UTF-8">
     <title>Witamy w FIT&GIT!</title>
 </head>
+<div class="section">
 <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
     <h1>Witaj w aplikacji FIT&GIT!</h1>
 </div>
 <body>
-<a href="/">Pokaż wszystkie przpiesy</a>
-<div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
-    <div class="card-body">
-
-
-        <ul>
-            <p>Przepisy: </p>
-            <li th:each="przepis: ${reciptes}">
-                <a th:href="|/przepis?id=${przepis.Id}|" th:text="${przepis.title}"></a>
-            </li>
-        </ul>
-    </div>
-</div>
-
-<a href="/new">Dodaj nowy przepis</a>
+<h3>Witamy na stronie FIT&GIT. Wybierz jedną z poniższych opcji, aby rozpocząć.</h3><br/>
+<a href="/home">Pokaż wszystkie przepisy</a><br/>
+<a href="/new">Dodaj nowy przepis</a><br/>
 
 
 <form th:action="@{/deleteall}" method = "post" th:object="${przepis}" >
     <input type="submit" value="Usuń wszystkie przepisy!" class="btn btn-primary">
 </form>
+</div>
 </body>
 </html>

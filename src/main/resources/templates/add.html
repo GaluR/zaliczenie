@@ -5,21 +5,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>FIT&GIT</title>
 </head>
 <body>
-<h3>Dodawanie nowe przepisu</h3>
+
+<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+    <h3>Dodawanie nowego przepisu</h3>
+</div>
 
 
 <form th:action="@{/add}" method="post" th:object="${addRecipe}">
     <div class="form-group">
-        <p>Podaj nazwę przepisu</p><br/>
-        <input type="text" th:field="*{title}" placeholder="Nazwa przepisu"/><br/>
+        <p>Podaj nazwę przepisu</p>
+        <input type="text" th:field="*{title}" placeholder="Nazwa przepisu"/>
         <p>Opis przepisu</p>
-        <textarea th:field="*{description}" placeholder="Opis przepisu"/> <br/>
-        <p>Podaj czas przygotowania potrawy</p><br/>
-        <input type="time" th:field="*{time}" placeholder="Czas przygotowania"/><br/>
-    </div>
+        <textarea th:field="*{description}" placeholder="Opis przepisu"/>
+        <p>Podaj czas przygotowania potrawy</p>
+        <input type="time" th:field="*{time}" placeholder="Czas przygotowania"/>
     <br/>
     <input type="submit" value="Dodaj zadanie" class="btn btn-primary"/> <br/>
 </form>
