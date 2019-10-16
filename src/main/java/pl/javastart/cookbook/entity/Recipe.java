@@ -26,8 +26,6 @@ public class Recipe {
         this.time = time;
     }
 
-    @OneToOne
-    private Ingredients ingredients;
 
     public long getId() {
         return Id;
@@ -53,13 +51,6 @@ public class Recipe {
         this.description = description;
     }
 
-    public Ingredients getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(Ingredients ingredients) {
-        this.ingredients = ingredients;
-    }
 
     public Recipe() {
     }
