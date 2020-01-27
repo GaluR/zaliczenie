@@ -1,24 +1,42 @@
 <!DOCTYPE html>
-<html lang="en" xml:th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
     <meta charset="UTF-8">
     <title>Witamy w FIT&GIT!</title>
 </head>
-<div class="section">
-<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
-    <h1>Witaj w aplikacji FIT&GIT!</h1>
-</div>
 <body>
-<h3>Witamy na stronie FIT&GIT. Wybierz jedną z poniższych opcji, aby rozpocząć.</h3><br/>
-<a href="/home">Pokaż wszystkie przepisy</a><br/>
-<a href="/new">Dodaj nowy przepis</a><br/>
 
+<div class="section">
+    <div th:fragment="myHome">
+        <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+            <h1>Witaj w aplikacji FIT&GIT!</h1>
+        </div>
+        <h3> Witamy na stronie FIT&GIT </h3><br/>
+        <a href="/">Strona startowa</a><br/>
+        <a href="/home">Pokaż wszystkie przepisy</a><br/>
+        <a href="/new">Dodaj nowy przepis</a><br/>
 
-<form th:action="@{/deleteall}" method = "post" th:object="${przepis}" >
-    <input type="submit" value="Usuń wszystkie przepisy!" class="btn btn-primary">
-</form>
+        <form action="/home" method="get">
+            <input type="text" name="title" placeholder="Nazwa przepisu"/>
+            <input type="submit" value="Wyszukaj przepis!">
+        </form>
+    </div>
+    <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+        <div class="card-body">
+            <ul>
+                <h2>Przepisy: </h2>
+                <li th:each="przepis: ${reciptes}">
+                    <a th:href="|/przepis?id=${przepis.Id}|" th:text="${przepis.title}"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br/>
+
 </div>
 </body>
+
 </html>

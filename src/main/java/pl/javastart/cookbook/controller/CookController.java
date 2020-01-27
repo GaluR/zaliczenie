@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.javastart.cookbook.entity.Recipe;
 import pl.javastart.cookbook.repository.CookBookRepository;
-import java.util.List;
 
+import java.util.List;
 
 
 @Controller
@@ -21,29 +21,31 @@ public class CookController {
     }
 
     @GetMapping("/")
-    public String start(Model model) {
-        List<Recipe> reciptes = cookBookRepository.findAll();
-        model.addAttribute("reciptes", reciptes);
-        model.addAttribute("addRecipe", new Recipe());
-        return "home";
+    public String start(@RequestParam(required = false) String title, Model model) {
+        return "starter";
     }
+
     @GetMapping("/home")
-    public String getRecipt(Model model) {
-        List<Recipe> reciptes = cookBookRepository.findAll();
+    public String getRecipt(@RequestParam(required = false) String title, Model model) {
+        List<Recipe> reciptes;
+        if(title != null){
+            reciptes = cookBookRepository.findAllByTitleContainsIgnoreCase(title);
+        }else {
+            reciptes = cookBookRepository.findAll();
+        }
         model.addAttribute("reciptes", reciptes);
-        model.addAttribute("addRecipe", new Recipe());
-        return "start";
+        return "home";
     }
 
     @GetMapping("/przepis")
-    public String taskInfo(@RequestParam long id, Model model) {
+    public String recipeInfo(@RequestParam long id, Model model) {
         Recipe przepis = cookBookRepository.getOne(id);
         model.addAttribute("przepis", przepis);
         return "przepisinfo";
     }
 
     @PostMapping("/add")
-    public String addTask(Recipe recipe) {
+    public String addRecipe(Recipe recipe) {
         cookBookRepository.save(recipe);
         return "redirect:/";
     }
@@ -60,19 +62,4 @@ public class CookController {
         return "add";
     }
 
-    @PostMapping("/deleteall")
-    public String deleteAllRecipes() {
-        cookBookRepository.deleteAll();
-        return "redirect:/";
-    }
-
-    @PostMapping("edit")
-    public String edit(@RequestParam long id){
-        Recipe one = cookBookRepository.getOne(id);
-        one.setTitle(one.getTitle());
-        one.setDescription(one.getDescription());
-        one.setTime(one.getTime());
-        cookBookRepository.save(one);
-        return "redirect:/";
-    }
 }
